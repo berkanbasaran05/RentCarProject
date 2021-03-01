@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Business.Utilities
+namespace DateAccess.Concrete.EntityFrameWork
 {
-   public class ValidationTool
+    class EfRentalDal
     {
-        
     }
 }

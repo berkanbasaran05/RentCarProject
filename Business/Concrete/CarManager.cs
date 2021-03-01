@@ -19,20 +19,18 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        
+
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
-
         }
 
         public IResult Delete(Car car)
         {
-
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
-
         }
 
         public IDataResult<List<Car>> GetAll()
@@ -45,31 +43,29 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id));
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetails(Expression<Func<Car, bool>> filter = null)
-        {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(filter));
-
-        }
-
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int p)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == p));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByColorId(int p)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == p));
         }
 
+
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
+
             _carDal.Update(car);
-            return new SuccessResult(Messages.CarUptated);
+            return new SuccessResult(Messages.CarUpdated);
+
         }
     }
 }

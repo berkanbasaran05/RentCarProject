@@ -16,17 +16,14 @@ namespace Business.Concrete
             _colorDal = brandDal;
         }
 
-        
-        public IResult Add(Color entity)
+
+        public IResult Add(Color color)
         {
-            _colorDal.Add(entity);
+            _colorDal.Add(color);
             return new SuccessResult(Messages.ColorAdded);
         }
 
-        public IResult Add(System.Drawing.Color color)
-        {
-            throw new System.NotImplementedException();
-        }
+
 
         public IResult Delete(Color color)
         {
@@ -35,10 +32,7 @@ namespace Business.Concrete
 
         }
 
-        public IResult Delete(System.Drawing.Color color)
-        {
-            throw new System.NotImplementedException();
-        }
+
 
         public IDataResult<List<Color>> GetAll()
         {
@@ -51,27 +45,19 @@ namespace Business.Concrete
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id));
         }
 
-        
-        public IResult Update(Color entity)
+
+        public IResult Update(Color color)
         {
-            _colorDal.Update(entity);
+            _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);
 
         }
 
-        public IResult Update(System.Drawing.Color color)
+        IDataResult<List<Color>> IColorService.GetAll()
         {
-            throw new System.NotImplementedException();
-        }
-
-        IDataResult<List<System.Drawing.Color>> IColorService.GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        IDataResult<System.Drawing.Color> IColorService.GetById(int id)
-        {
-            throw new System.NotImplementedException();
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
         }
     }
 }
+
+       
